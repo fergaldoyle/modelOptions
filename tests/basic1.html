@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Basic options, input & textarea</title>
+
+	<link href="style.css" rel="stylesheet" />
+
+	<!---->
+	<script src="angular1.2.js"></script>
+	<script src="../ngModelOptions.js"></script>
+	<!---->
+	<!---- >
+	<script src="angular1.3.js"></script>
+	<script>angular.module("modelOptions", []);</script>
+	<!---->
+
+
+	<script>
+		angular.module('optionsTest', ["modelOptions"])
+		.controller('optionsTest', function ($scope) {
+
+			$scope.tests = {};
+
+			$scope.$watch("tests", function () {
+				console.log("model update", arguments);
+			}, true);
+
+			$scope.clicked = function () {
+				console.log("clicked");
+			}
+
+			$scope.changed = function () {
+				console.log("changed");
+			}
+
+		});
+	</script>
+
+</head>
+<body ng-app="optionsTest" ng-controller="optionsTest">
+
+	<h1>Basic options, input &amp; textarea</h1>
+
+	<label>
+		<strong>{ debounce: 1000 }</strong>
+		<input type="text"
+			   ng-click="clicked()"
+			   ng-change="changed()"
+			   ng-model="tests.one"
+			   ng-model-options="{ updateOn: 'default', debounce: {'default': 1000} }" />
+	</label>
+	<pre>tests.one = <span ng-bind="tests.one"></span></pre>
+
+	<label>
+		<strong>{ updateOn: 'default blur', debounce: {'default': 2000, 'blur': 500} }</strong>
+		<textarea ng-model="tests.two"
+				  ng-model-options="{ updateOn: 'default blur', debounce: {'default': 2000, 'blur': 500} }"></textarea>
+	</label>
+	<pre>tests.two = <span ng-bind="tests.two"></span></pre>
+
+	<label>
+		<strong>{ updateOn: 'blur' }</strong>
+		<input type="text"
+			   ng-model="tests.three"
+			   ng-model-options="{ updateOn: 'blur' }" />
+
+	</label>
+	<pre>tests.three = <span ng-bind="tests.three"></span></pre>
+
+	<label>
+		<strong>Omitting some debounce options - { updateOn: 'keyup blur', debounce: {'keyup': 2000} }</strong>
+		<input type="text"
+			   ng-model="tests.four"
+			   ng-model-options="{ updateOn: 'keyup blur', debounce: {'keyup': 2000} }" />
+	</label>
+	<pre>tests.four = <span ng-bind="tests.four"></span></pre>
+
+</body>
+</html>

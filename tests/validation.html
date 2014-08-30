@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Basic options, input & textarea</title>
+
+	<link href="style.css" rel="stylesheet" />
+
+	<!---->
+	<script src="angular1.2.js"></script>
+	<script src="../ngModelOptions.js"></script>
+	<!---->
+	<!---- >
+	<script src="angular1.3.js"></script>
+	<script>angular.module("modelOptions", []);</script>
+	<!---->
+
+
+	<script>
+		angular.module('optionsTest', ["modelOptions"])
+		.controller('optionsTest', function ($scope) {
+
+			$scope.tests = {};
+
+			$scope.$watch("tests", function () {
+				console.log("model update", arguments);
+			}, true);
+
+			$scope.clicked = function () {
+				console.log("clicked");
+			}
+
+			$scope.changed = function () {
+				console.log("changed");
+			}
+
+		});
+	</script>
+
+</head>
+<body ng-app="optionsTest" ng-controller="optionsTest">
+
+	<h1>Validation tests</h1>
+
+	<form name="myForm">
+		<label>
+			<strong>Validation &amp; extra arguments, { debounce: 1000 }</strong>
+			<input type="text"
+				   name="test"
+				   ng-model="tests.one"
+				   ng-required="true"
+				   ng-maxlength="5"
+				   ng-model-options="{ debounce: 1000 }" />
+		</label>
+
+		<pre>tests.one = <span ng-bind="tests.one"></span></pre>
+
+		myForm.test.$valid = {{myForm.test.$valid}}<br>
+		myForm.test.$error = {{myForm.test.$error}}<br>
+		myForm.$valid = {{myForm.$valid}}<br>
+		myForm.$error.required = {{!!myForm.$error.required}}
+
+	</form>
+
+	<form name="myForm2">
+		<label>
+			<strong>Number - { debounce: 1000 }</strong>
+			<input type="number"
+				   name="test"
+				   ng-model="tests.two"
+				   ng-required="true"
+				   ng-model-options="{ debounce: 1000 }" />
+		</label>
+
+		<pre>tests.two = <span ng-bind="tests.two"></span></pre>
+
+		myForm2.test.$valid = {{myForm2.test.$valid}}<br>
+		myForm2.test.$error = {{myForm2.test.$error}}<br>
+		myForm2.$valid = {{myForm2.$valid}}<br>
+		myForm2.$error.required = {{!!myForm2.$error.required}}
+
+	</form>
+
+	<form name="myForm3">
+		<label>
+			<strong>Date { debounce: 1000 }</strong>
+			<input type="date"
+				   name="test"
+				   ng-model="tests.three"
+				   ng-required="true"
+				   ng-model-options="{ debounce: 1000 }" />
+		</label>
+
+		<pre>tests.three = <span ng-bind="tests.three"></span></pre>
+
+		myForm3.test.$valid = {{myForm3.test.$valid}}<br>
+		myForm3.test.$error = {{myForm3.test.$error}}<br>
+		myForm3.$valid = {{myForm3.$valid}}<br>
+		myForm3.$error.required = {{!!myForm3.$error.required}}
+
+	</form>
+
+</body>
+</html>

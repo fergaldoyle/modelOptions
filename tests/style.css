@@ -1,0 +1,31 @@
+body {
+	line-height: 1.5;
+	padding: 10px 50px;
+	font-family: Arial;
+	font-size: 13px;
+}
+
+label {
+	display: block;
+}
+
+
+label:first-child {
+	margin-top: 0;
+}
+
+label > strong {
+	display: block;
+}
+
+pre {
+	clear: both;
+	margin-bottom: 40px;
+	padding-top: 8px;
+}
+
+form {
+	margin-bottom: 30px;
+	border: 1px solid #ccc;
+	padding: 20px;
+}

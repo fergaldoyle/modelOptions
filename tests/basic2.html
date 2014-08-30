@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<title>Basic options, select, radio, checkbox</title>
+
+	<link href="style.css" rel="stylesheet" />
+
+	<!---->
+	<script src="angular1.2.js"></script>
+	<script src="../ngModelOptions.js"></script>
+	<!---->
+	<!---- >
+	<script src="angular1.3.js"></script>
+	<script>angular.module("modelOptions", []);</script>
+	<!---->
+	<script>
+		angular.module('optionsTest', ["modelOptions"])
+		.controller('optionsTest', function ($scope) {
+
+			$scope.tests = {};
+
+			$scope.options = [
+				{ value: "one", id: 1, deep: { foo: "bar" } },
+				{ value: "two", id: 2, deep: { foo: "bar2" } },
+				{ value: "three", id: 9, deep: { foo: "bar3" } }
+			];
+
+			$scope.specialValue = {
+				some: "specialValue",
+			};
+
+			$scope.trueValue = {
+				foo: "bar"
+			};
+
+			$scope.$watch("tests", function () {
+				console.log("model update", arguments);
+			}, true);
+
+			$scope.clicked = function () {
+				console.log("clicked");
+			}
+
+			$scope.changed = function () {
+				console.log("changed");
+			}
+
+		});
+	</script>
+
+</head>
+<body ng-app="optionsTest" ng-controller="optionsTest">
+
+	<h1>Basic options, select, radio, checkbox</h1>
+
+	<strong>RADIO - { debounce: 500 } &amp; special value</strong>
+	<label>
+		<strong>Red</strong>
+		<input type="radio" ng-model="tests.one" value="red" name="radios" ng-model-options="{ debounce: 500 }">
+	</label>
+
+	<label>
+		<strong>specialValue</strong>
+		<input type="radio" ng-model="tests.one" ng-value="specialValue" name="radios" ng-model-options="{ debounce: 500 }">
+	</label>
+
+	<label>
+		<strong>Blue</strong>
+		<input type="radio" ng-model="tests.one" value="blue" name="radios" ng-model-options="{ debounce: 500 }">
+	</label>
+	<pre>tests.one = {{tests.one}}</pre>
+
+	<strong>CHECKBOX - { debounce: 500 } &amp; ngTrueValue, ngFalseValue</strong>
+	<label>
+		<strong>Value1:</strong>
+		<input type="checkbox" ng-click="clicked()" ng-model="tests.two1" ng-model-options="{ debounce: 500 }">
+	</label>
+
+	<label>
+		<strong>Value2:</strong>
+		<input type="checkbox" ng-model="tests.two2" ng-true-value="{{trueValue}}" ng-false-value="NO" ng-model-options="{ debounce: 500 }">
+	</label>
+
+	<pre>tests.two1 = {{tests.two1}}, tests.two2 = {{tests.two2}}</pre>
+
+
+	<strong>SELECT - object as value</strong>
+	<label>
+		<strong>{ debounce: 500 }</strong>
+		<select ng-model="tests.three"
+				ng-options="o as o.value for o in options"
+				ng-model-options="{ debounce: 500 }">
+			<option ng-disabled="true" value=""></option>
+		</select>
+
+	</label>
+	<label>
+		<strong>Normal</strong>
+		<select ng-model="tests.three"
+				ng-options="o as o.value for o in options">
+			<option ng-disabled="true" value=""></option>
+		</select>
+
+	</label>
+	<pre>tests.three = {{tests.three}}</pre>
+
+	<strong>SELECT - deep object as value</strong>
+	<label>
+		<strong>{ debounce: 500 }</strong>
+		<select ng-model="tests.four"
+				ng-options="o.deep.foo as o.value for o in options"
+				ng-model-options="{ debounce: 500 }">
+			<option ng-disabled="true" value=""></option>
+		</select>
+
+	</label>
+	<label>
+		<strong>Normal</strong>
+		<select ng-model="tests.four"
+				ng-options="o.deep.foo as o.value for o in options">
+			<option ng-disabled="true" value=""></option>
+		</select>
+
+	</label>
+	<pre>tests.four = {{tests.four}}</pre>
+
+	<strong>SELECT - object property as value</strong>
+	<label>
+		<strong>{ debounce: 500 }</strong>
+		<select ng-model="tests.five"
+				ng-change="changed()"
+				ng-options="o as o.value for o in options track by o.id"
+				ng-model-options="{ debounce: 500 }">
+			<option ng-disabled="true" value=""></option>
+		</select>
+
+	</label>
+	<label>
+		<strong>Normal</strong>
+		<select ng-model="tests.five"
+				ng-options="o as o.value for o in options track by o.id">
+			<option ng-disabled="true" value=""></option>
+		</select>
+
+	</label>
+	<pre>tests.five = {{tests.five}}</pre>
+
+
+</body>
+</html>
