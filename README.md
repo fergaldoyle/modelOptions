@@ -24,7 +24,7 @@ Supports the same syntax as official ngModelOptions
 
 ###Limitations
 ####Select
- With `select` elements, the first blank dummy option is not removed when this directive is used. It won't be removed anyway due to an IE8 bug so it's best to add a blank, disabled option `<option ng-disabled="true" value=""></option>` to solve both problems.
+ With `select` elements, the first blank dummy option is not removed when this directive is used. With IE8, the removal of this inital blank option when a valid option is selected never worked in Angular anyway, so it's best to add a disabled option `<option ng-disabled="true" value=""></option>` to the `select` element to solve both problems.
  
 ####Events
 Some event listeners are turned off for elements to prevent automattic model updates. e.g. angular uses the `click` event to update model for `radio` and `checkbox`. When using this directive, `ng-click` will no longer work on `radio` or `checkbox` inputs. Similarly `ng-change` will no longer work if using this directive on a `select` element.
