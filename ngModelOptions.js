@@ -43,14 +43,6 @@ angular.module("modelOptions", []).directive("ngModelOptions", function () {
 
 				scope.$apply(function () {
 					ctrls[0].$setViewValue(value);
-					/*
-					// remove the first option if it's a dummy
-					if (ctrls[1]) {
-						if (elm[0].options[0].value === "?") {
-							elm[0].remove(0);
-						}
-					}
-					*/
 				});
 			}
 
@@ -82,29 +74,14 @@ angular.module("modelOptions", []).directive("ngModelOptions", function () {
 
 				// value is a property of an object
 				if (/.*\..*/.test(match[1])) {
-					console.log(match[1].replace(/^.*?\./, valuesName + "[" + index + "]."));
 					return scope.$eval(match[1].replace(/^.*?\./, valuesName + "[" + index + "]."));
 				} else { // value is an object
 					return values[index];
 				}
-
-				/*
-					var displayFn = $parse(match[2] || match[1]),
-					valueName = match[4] || match[6],
-					keyName = match[5],
-					groupByFn = $parse(match[3] || ''),
-					valueFn = $parse(match[2] ? match[1] : valueName),
-					valuesFn = $parse(match[7]),
-					track = match[8],
-					trackFn = track ? $parse(match[8]) : null,
-					optionGroupsCache = [[{element: selectElement, label:''}]];
-				*/
-
 			}
 
 			var timer,
 				NG_OPTIONS_REGEXP = /^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+group\s+by\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?$/,
-				//defaultEvents = ["keydown", "change", "blur", "input", "click"],
 				tagType = elm[0].nodeName.toLowerCase() + (attr.type || ""),
 				defaultEvents = [],
 				debounces = {},
@@ -124,10 +101,6 @@ angular.module("modelOptions", []).directive("ngModelOptions", function () {
 				defaultEvents = ["change"];
 			} else {
 				defaultEvents = ["keydown", "input", "change"];
-			}
-
-			if (attr.ngOptions) {
-				console.log(attr.ngOptions.match(NG_OPTIONS_REGEXP));
 			}
 
 			// unbind default events to prevent automatic model updates	
@@ -160,7 +133,6 @@ angular.module("modelOptions", []).directive("ngModelOptions", function () {
 			}
 
 			// the other events if specified
-			//console.log(updateOnSplit);
 			angular.forEach(updateOnSplit, function (event) {
 				if (event === "default") {
 					return;
