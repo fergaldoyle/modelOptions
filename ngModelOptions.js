@@ -1,3 +1,11 @@
+/**
+* ngModelOptions: ngModelOptions for AngularJS 1.2
+*
+* @author Fergal Doyle
+* @url https://github.com/fergaldoyle/modelOptions
+* @license MIT
+*/
+
 angular.module("modelOptions", []).directive("ngModelOptions", function () {
 	return {
 		priority: 1,
@@ -26,10 +34,11 @@ angular.module("modelOptions", []).directive("ngModelOptions", function () {
 						break;
 					default:
 						value = elm.val();
-				}
 
-				if (!attr.ngTrim || attr.ngTrim.toLowerCase() !== "false") {
-					value = value.replace(/^\s+|\s+$/g, "");
+						if (!attr.ngTrim || attr.ngTrim.toLowerCase() !== "false") {
+							value = value.replace(/^\s+|\s+$/g, "");
+						}
+
 				}
 
 				scope.$apply(function () {
