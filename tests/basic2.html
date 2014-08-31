@@ -125,11 +125,33 @@
 
 	</label>
 	<pre>tests.four = {{tests.four}}</pre>
+	
 
 	<strong>SELECT - object property as value</strong>
 	<label>
 		<strong>{ debounce: 500 }</strong>
 		<select ng-model="tests.five"
+				ng-change="changed()"
+				ng-options="o.value as o.value for o in options"
+				ng-model-options="{ debounce: 500 }">
+			<option ng-disabled="true" value=""></option>
+		</select>
+
+	</label>
+	<label>
+		<strong>Normal</strong>
+		<select ng-model="tests.five"
+				ng-options="o.value as o.value for o in options">
+			<option ng-disabled="true" value=""></option>
+		</select>
+
+	</label>
+	<pre>tests.five = {{tests.five}}</pre>
+
+	<strong>SELECT - track by</strong>
+	<label>
+		<strong>{ debounce: 500 }</strong>
+		<select ng-model="tests.six"
 				ng-change="changed()"
 				ng-options="o as o.value for o in options track by o.id"
 				ng-model-options="{ debounce: 500 }">
@@ -139,13 +161,13 @@
 	</label>
 	<label>
 		<strong>Normal</strong>
-		<select ng-model="tests.five"
+		<select ng-model="tests.six"
 				ng-options="o as o.value for o in options track by o.id">
 			<option ng-disabled="true" value=""></option>
 		</select>
 
 	</label>
-	<pre>tests.five = {{tests.five}}</pre>
+	<pre>tests.six = {{tests.six}}</pre>
 
 
 </body>
