@@ -1,6 +1,6 @@
 {
   "name": "modelOptions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ngModelOptions for AngularJS 1.2",
   "repository": {
     "type": "git",

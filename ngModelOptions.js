@@ -1,5 +1,5 @@
 /**
-* ngModelOptions: ngModelOptions for AngularJS 1.2
+* ngModelOptions v1.0.1: ngModelOptions for AngularJS 1.2
 *
 * @author Fergal Doyle
 * @url https://github.com/fergaldoyle/modelOptions
@@ -84,7 +84,6 @@ angular.module("modelOptions", []).directive("ngModelOptions", function () {
 				NG_OPTIONS_REGEXP = /^\s*([\s\S]+?)(?:\s+as\s+([\s\S]+?))?(?:\s+group\s+by\s+([\s\S]+?))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?$/,
 				tagType = elm[0].nodeName.toLowerCase() + (attr.type || ""),
 				defaultEvents = [],
-				debounces = {},
 				defaults = {
 					debounce: 0,
 					updateOn: "default"
@@ -110,17 +109,6 @@ angular.module("modelOptions", []).directive("ngModelOptions", function () {
 				try { elm.off(event); } catch (e) { }
 			});
 
-			// debounce option can be number or object
-			// populate the debounces object with relevant 
-			// debounce value per event
-			angular.forEach(updateOnSplit, function (event) {
-				if (multiDebounce) {
-					debounces[event] = options.debounce[event];
-				} else {
-					debounces[event] = options.debounce;
-				}
-			});
-
 			// default events
 			if (options.updateOn.match(/default/i)) {
 				elm.on(defaultEvents.join(" "), function (e) {
@@ -138,7 +126,15 @@ angular.module("modelOptions", []).directive("ngModelOptions", function () {
 					return;
 				}
 
-				var delay = debounces[event];
+				// debounce option can be number or object
+				var deb;
+				if (multiDebounce) {
+					deb = options.debounce[event];
+				} else {
+					deb = options.debounce;
+				}
+
+				var delay = deb;
 				if (typeof delay === "undefined") {
 					delay = options.debounce["default"] || 0;
 				}

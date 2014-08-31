@@ -77,5 +77,13 @@
 	</label>
 	<pre>tests.four = <span ng-bind="tests.four"></span></pre>
 
+	<label>
+		<strong>default bebounce option only - { updateOn: 'keyup blur', debounce: {'default': 2000} }</strong>
+		<input type="text"
+			   ng-model="tests.five"
+			   ng-model-options="{ updateOn: 'keyup blur', debounce: {'default': 2000} }" />
+	</label>
+	<pre>tests.five = <span ng-bind="tests.five"></span></pre>
+
 </body>
 </html>
