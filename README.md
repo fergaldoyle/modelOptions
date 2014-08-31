@@ -23,6 +23,9 @@ Supports the same syntax as official ngModelOptions
 
 
 ###Limitations
+
+Currently only supports the `debounce` and `updateOn` options.
+
 ####Select
  With `select` elements, the first blank dummy option is not removed when this directive is used. With IE8, the removal of this inital blank option when a valid option is selected never worked in Angular anyway, so it's best to add a disabled option `<option ng-disabled="true" value=""></option>` to the `select` element to solve both problems.
  
