@@ -1,11 +1,12 @@
 {
-  "name": "modelOptions",
+  "name": "ngModelOptions",
   "version": "1.0.1",
   "description": "ngModelOptions for AngularJS 1.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/fergaldoyle/modelOptions.git"
   },
+  "main": "./ngModelOptions.js",
   "keywords": [
     "ng-model-options",
     "ngModelOptions",
