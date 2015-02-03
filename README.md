@@ -4,6 +4,8 @@ Directive to bring functionality similar to the new Angular 1.3 ngModelOptions t
 
 Works well with all input types (text, number, date, radio, checkbox, select) and doesn't break Angular validation.
 
+`npm install ngmodeloptions`
+
 ###Example
 Include the module
     
