@@ -4,6 +4,7 @@
   "main": "ngModelOptions.js",
   "homepage": "https://github.com/fergaldoyle/modelOptions",
   "authors": [
+    "Fergal Doyle",
     "bitliner <giovanni.gaglione@gmail.com>"
   ],
   "license": "MIT",
